@@ -8,13 +8,6 @@ const products = [
         icon: '🎧'
     },
     {
-        id: 2,
-        name: 'Smart Watch',
-        price: 199.99,
-        description: 'Fitness tracking, heart rate monitor, and notifications',
-        icon: '⌚'
-    },
-    {
         id: 3,
         name: 'Laptop Stand',
         price: 49.99,
