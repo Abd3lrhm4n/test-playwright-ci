@@ -214,16 +214,16 @@ test.describe('TechShop - Shopping Cart Modal', () => {
     let quantityDisplay = page.locator('.quantity-display').first();
     await expect(quantityDisplay).toContainText('1');
 
-    await page.locator('.quantity-btn').first().click();
+    await page.locator('.quantity-btn').last().click();
     await expect(quantityDisplay).toContainText('2');
 
-    await page.locator('.quantity-btn').first().click();
+    await page.locator('.quantity-btn').last().click();
     await expect(quantityDisplay).toContainText('3');
 
     const buttons = await page
       .locator('.cart-item-controls .quantity-btn')
       .all();
-    await buttons[1].click();
+    await buttons[0].click();
     await expect(quantityDisplay).toContainText('2');
   });
 
@@ -239,7 +239,7 @@ test.describe('TechShop - Shopping Cart Modal', () => {
     const buttons = await page
       .locator('.cart-item-controls .quantity-btn')
       .all();
-    await buttons[1].click();
+    await buttons[0].click();
 
     await expect(page.locator('.empty-cart')).toContainText(
       'Your cart is empty',
@@ -285,13 +285,13 @@ test.describe('TechShop - Shopping Cart Modal', () => {
   test('should show confirmation dialog when clearing cart', async ({
     page,
   }) => {
-    await page.locator('.add-to-cart-btn').first().click();
+    await page.locator('.add-to-cart-btn').last().click();
     await page.locator('#cartIcon').click();
 
     let dialogTriggered = false;
     page.once('dialog', (dialog) => {
       dialogTriggered = true;
-      expect(dialog.message).toContain('Are you sure');
+      expect(dialog.message()).toContain('Are you sure');
       dialog.dismiss();
     });
 
@@ -385,7 +385,7 @@ test.describe('TechShop - Checkout', () => {
     await page.locator('#cartIcon').click();
 
     const buttons = await page.locator('.quantity-btn').all();
-    await buttons[0].click();
+    await buttons[1].click();
 
     await page.locator('#closeCart').click();
 
